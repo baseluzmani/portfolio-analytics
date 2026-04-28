@@ -4,6 +4,7 @@ Run with: python3 app.py
 Then open: http://localhost:8051
 """
 
+import dash_ag_grid as dag
 import dash
 from dash import html, dcc
 
@@ -13,6 +14,14 @@ app = dash.Dash(
     suppress_callback_exceptions=True,
     meta_tags=[{"name": "viewport", "content": "width=device-width, initial-scale=1"}],
 )
+
+# AG Grid CSS for professional table rendering
+app.css.append_css({
+    "external_url": "https://cdn.jsdelivr.net/npm/ag-grid-community@31/styles/ag-grid.min.css"
+})
+app.css.append_css({
+    "external_url": "https://cdn.jsdelivr.net/npm/ag-grid-community@31/styles/ag-theme-alpine.min.css"
+})
 
 app.title = "Portfolio Analytics"
 
@@ -58,12 +67,14 @@ app.layout = html.Div([
     
     # Navigation tabs
     html.Div([
+        dcc.Link('My Holdings', href='/my-holdings', style=link_style),
+        dcc.Link('Market Overview', href='/market-overview', style=link_style),
         dcc.Link('Correlation Matrix', href='/correlation', style=link_style),
         dcc.Link('Return Clusters', href='/clustering', style=link_style),
         dcc.Link('Overlap Detector', href='/overlap-detector', style=link_style),
         dcc.Link('Data Quality', href='/data-quality', style=link_style),
     ], style={
-        'display': 'flex', 'gap': '4px',
+        'display': 'flex', 'gap': '4px', 'flexWrap': 'wrap',
         'padding': '8px 20px', 'backgroundColor': '#f8f9fa',
         'borderBottom': '1px solid #e0e0e0',
     }),

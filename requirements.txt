@@ -4,3 +4,4 @@ plotly>=5.18.0
 numpy>=1.24.0
 scipy>=1.10.0
 networkx>=3.0
+dash-ag-grid

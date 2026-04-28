@@ -3,7 +3,6 @@
 import pandas as pd
 from .connection import get_connection
 
-
 def load_prices(fund_ids=None, min_date=None):
     """
     Load price history for specified funds.
@@ -13,12 +12,12 @@ def load_prices(fund_ids=None, min_date=None):
         min_date: Optional earliest date (YYYY-MM-DD).
     
     Returns:
-        DataFrame with columns: fund_id, fund_name, date, close
+        DataFrame with columns: fund_id, fund_name, asset_type, category, date, close
     """
     conn = get_connection()
     
     query = """
-        SELECT p.fund_id, i.name AS fund_name, i.category, 
+        SELECT p.fund_id, i.name AS fund_name, i.asset_type, i.category, 
                p.date, p.close
         FROM prices p
         JOIN instruments i ON p.fund_id = i.fund_id
@@ -42,7 +41,6 @@ def load_prices(fund_ids=None, min_date=None):
     
     df['date'] = pd.to_datetime(df['date'])
     return df
-
 
 def load_portfolio_holdings():
     """

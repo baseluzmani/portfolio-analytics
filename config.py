@@ -1,1 +1,0 @@
-/home/ahmet/FTScrapper/config.py
